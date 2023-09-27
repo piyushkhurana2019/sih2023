@@ -1,5 +1,7 @@
-import Carousel, {CarouselItem} from "./components/carousel";
-import './App.css'
+import Carousel, { CarouselItem } from "./components/carousel";
+import "./App.css";
+import { Products } from "./components/products";
+import contents from "./content";
 function App() {
   return (
     <div className="App">
@@ -12,6 +14,19 @@ function App() {
         <CarouselItem>ITEM 6</CarouselItem>
         <CarouselItem>ITEM 7</CarouselItem>
       </Carousel>
+      <div className="productContainer">
+        {contents.map((contents) => (
+          <Products
+            key={contents.id}
+            image={contents.image}
+            name={contents.name}
+            price={contents.price}
+            totalSales={contents.totalSales}
+            timeLeft={contents.timeLeft}
+            rating={contents.rating}
+          />
+        ))}
+      </div>
     </div>
   );
 }
