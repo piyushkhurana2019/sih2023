@@ -1,34 +1,85 @@
-import '../App.css'
+import React, { useEffect, useState } from "react";
+import "./Carousel.css";
 
-export default function Carousel(){
-    return(
-        <div id="carouselExampleControls" class="carousel slide my-1" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item">
-                <img class="img-fluid w-100"
-                    src="https://rukminim1.flixcart.com/flap/3376/560/image/c984b5508dd7784a.jpg?q=50"
-                    alt="Second slide" />
-            </div>
-            <div class="carousel-item">
-                <img class="img-fluid w-100"
-                    src="https://rukminim1.flixcart.com/flap/3376/560/image/869463be68567c24.jpg?q=50"
-                    alt="Third slide" />
-            </div>
-            <div class="carousel-item active">
-                <img class="img-fluid w-100"
-                    src="https://rukminim1.flixcart.com/flap/1688/280/image/56b20fa729139bde.jpg?q=50"
-                    alt="First slide" />
-            </div>
-        </div>
-
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href=" #carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+export const CarouselItem = ({ children, width }) => {
+  return (
+    <div className="carousel-item" style={{ width: width }}>
+      {children}
     </div>
-    );
-}
+  );
+};
+
+const Carousel = ({ children }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const updateIndex = (newIndex) => {
+    if (newIndex < 0) {
+      newIndex = React.Children.count(children) - 1;
+    }
+    else if (newIndex >= React.Children.count(children)) {
+      newIndex = 0;
+    }
+    setActiveIndex(newIndex);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if(!paused){
+        updateIndex(activeIndex + 1);
+      }
+    }, 2000);
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  });
+
+  return (
+    <div
+      className="carousel"
+      onMouseEnter={() => { setPaused(true) }}
+      onMouseLeave={() => { setPaused(false) }}
+    >
+      <div
+        className="inner"
+        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+      >
+        {React.Children.map(children, (child, index) => {
+          return React.cloneElement(child, { width: "100%" });
+        })}
+      </div>
+      <div className="indicators">
+        <button
+          onClick={() => {
+            updateIndex(activeIndex - 1);
+          }}
+        >
+          Prev
+        </button>
+        {React.Children.map(children, (child, index) =>{
+          return (
+            <button
+              className={`${index === activeIndex ? 'active':''}`}
+              onClick={() => {
+              updateIndex(index);
+            }}>
+              {index + 1}
+            </button>
+          );
+        })}
+        <button
+          onClick={() => {
+            updateIndex(activeIndex + 1);
+          }}
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Carousel;
