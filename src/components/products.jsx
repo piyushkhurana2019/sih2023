@@ -1,9 +1,20 @@
 import { FaShoppingCart, FaRegBookmark, FaStar, FaFireAlt } from 'react-icons/fa';
 import './product.css';
 
-export function Products(props) {
+export function ProductCategory({children}){
     return(
+        <div className='product-container'>
+            
+            {children}
+        </div>
+    );
+}
+
+export function Products( props ) {
+    return(
+        
         <div className='productList'>
+            
             <div key={props.id} className='productCard'>
                 <img src={props.image} alt='product-img' className='productImage'></img>
 
@@ -14,7 +25,7 @@ export function Products(props) {
                 <div className='productCard__content'>
                     <h3 className='productName'>{props.name}</h3>
                     <div className='displayStack__1'>
-                        <div className='productPrice'>${props.price}</div>
+                        <div className='productPrice'>Rs.{props.price}</div>
                         <div className='productSales'>{props.totalSales} units sold</div>
                     </div>
                     <div className='displayStack__2'>
