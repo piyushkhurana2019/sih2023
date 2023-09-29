@@ -1,8 +1,8 @@
 import Carousel, { CarouselItem } from "./components/carousel";
 import "./App.css";
-import { ProductCategory, Products } from "./components/products";
-import contents from "./content";
+import { displayProduct } from "./components/products";
 function App() {
+  
   return (
     <div className="App">
       <Carousel>
@@ -14,25 +14,8 @@ function App() {
         <CarouselItem>ITEM 6</CarouselItem>
         <CarouselItem>ITEM 7</CarouselItem>
       </Carousel>
-      <ProductCategory>
-        
-        {contents.map((contents) => {if(contents.category === 'ELECTRONICS') return (
-          <Products
-            category = {contents.category}
-            key={contents.id}
-            image={contents.image}
-            name={contents.name}
-            price={contents.price}
-            totalSales={contents.totalSales}
-            timeLeft={contents.timeLeft}
-            rating={contents.rating}
-          />
-        )
-        else return null;
-        })}
-      </ProductCategory>
-    </div>
-    
+      {displayProduct("ELECTRONICS")}
+    </div>    
   );
 }
 
