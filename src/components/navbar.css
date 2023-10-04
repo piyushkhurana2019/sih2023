@@ -16,7 +16,7 @@
 .search-bar {
     display: inline;
     width: 70rem; /* Adjust the width as needed */
-    margin: 1.5rem;  /* Center the search bar horizontally */
+    margin: auto;  /* Center the search bar horizontally */
     margin-left: 10rem;
   }
   
