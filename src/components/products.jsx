@@ -1,5 +1,6 @@
 import { FaShoppingCart, FaRegBookmark, FaStar, FaFireAlt } from 'react-icons/fa';
 import './product.css';
+import contents from "../content";
 
 export function ProductCategory({children}){
     return(
@@ -39,4 +40,27 @@ export function Products( props ) {
             </div>
         </div>
     )
+}
+
+export function displayProduct(category) {
+  return (
+    <ProductCategory>
+      {contents.map((contents) => {
+        if (contents.category === category)
+          return (
+            <Products
+              category={contents.category}
+              key={contents.id}
+              image={contents.image}
+              name={contents.name}
+              price={contents.price}
+              totalSales={contents.totalSales}
+              timeLeft={contents.timeLeft}
+              rating={contents.rating}
+            />
+          );
+        else return null;
+      })}
+    </ProductCategory>
+  );
 }
