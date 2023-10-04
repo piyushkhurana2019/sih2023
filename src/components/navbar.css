@@ -1,0 +1,50 @@
+.navbar{
+    display: flex;
+    width: 100vw;
+    height: 8vh;
+}
+.navbar img{
+  width: 7rem;
+  height: 7rem;
+  margin-left: 9rem;
+
+}
+.searchcontainer{
+  display: flex;
+
+}
+.search-bar {
+    display: inline;
+    width: 70rem; /* Adjust the width as needed */
+    margin: 1.5rem;  /* Center the search bar horizontally */
+    margin-left: 10rem;
+  }
+  
+  /* Style the search input */
+  .search-bar input[type="text"] {
+    flex: 1; /* Make the input expand to fill available space */
+    padding: 10px;
+    width: 50rem;
+    height: 5rem;
+    border: 1px solid #ccc;
+    /* border-radius: 10px; */
+    outline: none; /* Remove the default input outline */
+    background-color: #d3ddf2;
+  }
+  
+  /* Style the search button */
+  .search-bar button[type="submit"] {
+    height: 5rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    /* border-radius: 10px; */
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none; /* Remove the default button outline */
+  }
+  
+  /* Add hover effect for the button */
+  .search-bar button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
